@@ -25,11 +25,11 @@ func Auth(f Handler) Handler {
 	return func(r *http.Request) (int, any, error) {
 		token := r.Header.Get("Authorization")
 		if token == "" {
-			return 401, "", fmt.Errorf("use authorization header")
+			return 401, nil, fmt.Errorf("use authorization header")
 		}
 
 		if token != "password" {
-			return 401, "", fmt.Errorf("bad password")
+			return 401, nil, fmt.Errorf("bad password")
 		}
 
 		return f(r)
