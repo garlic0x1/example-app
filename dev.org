@@ -1,0 +1,64 @@
+#+title: Dev
+
+* endpoints
+** /hello
+#+begin_src restclient
+GET http://localhost:8001/hello
+#+end_src
+
+** /square
+#+begin_src restclient
+GET http://localhost:8001/square?n=3
+#+end_src
+
+#+RESULTS:
+#+BEGIN_SRC js
+9
+// GET http://localhost:8001/square?n=3
+// HTTP/1.1 200 OK
+// Content-Type: application/json
+// Date: Sun, 30 Apr 2023 11:29:26 GMT
+// Content-Length: 2
+// Request duration: 0.003905s
+#+END_SRC
+
+** /auth/cube
+*** GET
+#+begin_src restclient
+GET http://localhost:8001/auth/square?n=3
+Authorization: passwor
+#+end_src
+
+#+RESULTS:
+#+BEGIN_SRC js
+{
+  "status": 401,
+  "error": "bad password"
+}
+
+// GET http://localhost:8001/auth/square?n=3
+// HTTP/1.1 401 Unauthorized
+// Content-Type: application/json
+// Date: Sun, 30 Apr 2023 11:30:14 GMT
+// Content-Length: 38
+// Request duration: 0.004191s
+#+END_SRC
+
+*** POST
+#+begin_src restclient
+POST http://localhost:8001/auth/square
+Authorization: password
+
+{"n":4}
+#+end_src
+
+#+RESULTS:
+#+BEGIN_SRC js
+16
+// POST http://localhost:8001/auth/square
+// HTTP/1.1 200 OK
+// Content-Type: application/json
+// Date: Sun, 30 Apr 2023 11:39:37 GMT
+// Content-Length: 3
+// Request duration: 0.002138s
+#+END_SRC
